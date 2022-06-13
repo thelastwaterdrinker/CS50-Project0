@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)https://submit.cs50.io/courses/30 -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- https://github.com/ -->
+        <link href="https://github.githubassets.com/favicon.ico" rel="icon" type="image/x-icon">
+
+        <!-- jquery -->
+        <script src="./CS50-Course0_files/jquery-3.3.1.min.js"></script>
+        <script src="./CS50-Course0_files/moment.min.js"></script>
+        <script src="./CS50-Course0_files/moment-timezone-with-data.min.js"></script>
+
+        <!-- http://www.daterangepicker.com/ -->
+        <script type="text/javascript" src="./CS50-Course0_files/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./CS50-Course0_files/daterangepicker.css">
+
+        <!-- https://cdnjs.com/libraries/Primer -->
+        <link href="./CS50-Course0_files/build.css" rel="stylesheet">
+        <link href="./CS50-Course0_files/build(1).css" rel="stylesheet">
+
+        <!-- react -->
+        <script src="./CS50-Course0_files/react.production.min.js"></script>
+        <script src="./CS50-Course0_files/react-dom.production.min.js"></script>
+        <script>
+            $(function() {
+                $('.moment [data-moment=fromNow]').each(function() {
+                    $(this).text(moment($(this).text()).fromNow());
+                });
+                $('.moment [data-moment=LLLL]').each(function() {
+                    $(this).text(moment($(this).text()).format('LLLL') + ' ' + moment.tz(moment.tz.guess()).zoneAbbr());
+                });
+                $('.moment').removeClass('v-hidden');
+            });
+        </script>
+
+        <script>
+        function fetch_api(route, method, data) {
+            let request = {
+                method: method,
+                body: JSON.stringify(data),
+                credentials: "include",
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Time-Zone': moment.tz.guess()
+                }
+            };
+
+            if (method == "GET") {
+                if (data) {
+                    route += "?" + new URLSearchParams(data).toString();
+                }
+                delete request.body;
+            }
+
+            return fetch(`/api${route}`, request);
+        }
+
+        function ajax(route, method, data, onSuccess, onError) {
+            fetch_api(route, method, data).then(response => {
+                if (!response.ok) {
+                    response.json().then(res => {
+                        error = res["error"] !== undefined ? res["error"] : "An unexpected error occured, please contact sysadmins@cs50.harvard.edu";
+                        onError(error);
+                    });
+                } else {
+                    response.json().then(onSuccess);
+                }
+            });
+        }
+        </script>
+
+        <style>
+            .subnav-search {
+                margin-left: 0;
+            }
+        </style>
+
+        <title>me50/thelastwaterdrinker</title>
+        
+
+    </head>
+
+    <body class="p-3">
+
+        <div class="Subhead">
+            <div class="Subhead-heading">
+                <a class="text-bold" href="https://submit.cs50.io/">me50</a>
+                
+                
+                    <span class="path-divider">/</span>
+                    
+                        
+                    
+                    <a href="https://submit.cs50.io/courses/">courses</a>
+                
+                    <span class="path-divider">/</span>
+                    
+                        
+                    
+                    <a id="anchor_course_name" aria-current="page" href="https://submit.cs50.io/courses/30">CS50 Web</a>
+                
+            </div>
+            <div class="Subhead-actions">
+                
+                <div class="BtnGroup">
+                    <a href="https://submit.cs50.io/users" class="btn BtnGroup-item btn-sm" role="button">My Submissions</a>
+                    <a href="https://submit.cs50.io/courses" class="btn btn-sm BtnGroup-item" role="button">My Courses</a>
+                </div>
+                <div class="BtnGroup">
+                    <a href="https://cs50.readthedocs.io/" class="btn btn-sm" role="button" target="_blank">Docs</a>
+                </div>
+                
+                    <a href="https://submit.cs50.io/logout" class="btn btn-sm btn-blue" role="button">Log Out</a>
+                
+            </div>
+        </div>
+
+        
+
+    <div class="blankslate blankslate-large blankslate-spacious">
+
+        <svg height="32" class="octicon octicon-git-branch blankslate-icon" viewBox="0 0 10 16" version="1.1" width="20" aria-hidden="true"><path fill-rule="evenodd" d="M10 5c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v.3c-.02.52-.23.98-.63 1.38-.4.4-.86.61-1.38.63-.83.02-1.48.16-2 .45V4.72a1.993 1.993 0 0 0-1-3.72C.88 1 0 1.89 0 3a2 2 0 0 0 1 1.72v6.56c-.59.35-1 .99-1 1.72 0 1.11.89 2 2 2 1.11 0 2-.89 2-2 0-.53-.2-1-.53-1.36.09-.06.48-.41.59-.47.25-.11.56-.17.94-.17 1.05-.05 1.95-.45 2.75-1.25S8.95 7.77 9 6.73h-.02C9.59 6.37 10 5.73 10 5zM2 1.8c.66 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2C1.35 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2zm0 12.41c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm6-8c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
+
+        
+            <h3>No Submissions</h3>
+            <p>
+                You don't seem to have any submissions yet for the CS50 Web course.
+            </p>
+            <p>
+            You can submit via <a href="https://cs50.readthedocs.io/submit50/"><code>submit50</code></a> or, if comfortable with <code>git</code>, by pushing to <code>https://github.com/me50/thelastwaterdrinker.git</code>.
+            </p>
+        
+
+    </div>
+
+
+    
+
+</body></html>
